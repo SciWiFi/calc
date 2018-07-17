@@ -1,6 +1,31 @@
+body {
+    width: 500px;
+    margin: auto;
+}
+
 #show {
     height: 100px;
     width: 500px;
-    box-shadow: 7px 7px 10px;
+    border: 2px solid #eeeeee;
+    border-radius: 10px;
+    box-shadow: 1px -5px 5px -5px;
     margin: 10px;
+}
+
+button {
+    background-color: #ffffff;
+    border: 2px solid #9999ff;
+    border-radius: 3px;
+    padding: 10px 18px;
+    margin-bottom: 2px;
+    font-size: 19px;
+    font-family: sans-serif;
+}
+
+button:hover {
+     background-color: #9999ff;
+}
+
+#buttonsNum {
+    text-align: center;
 }
