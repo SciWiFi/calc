@@ -20,10 +20,21 @@ button {
     margin-bottom: 2px;
     font-size: 19px;
     font-family: sans-serif;
+    height: 50px;
+    width: 50px;
 }
 
 button:hover {
      background-color: #9999ff;
+}
+
+#buttonsOp {
+
+}
+
+#buttonsOp button {
+    display: block;
+    text-align: center;
 }
 
 #buttonsNum {
