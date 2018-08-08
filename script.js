@@ -1,12 +1,19 @@
 var input = "";
-var inputShow = "";
-var answer = "";
+var equalsPressed = false;
+var x = "";
+var y = "";
 var inputText = document.querySelector("#input");
 var answerText = document.querySelector("#answer");
 var op = "";
-var x = 0;
-var y = 0;
-var tmpY = "";
+var answer = "";
+const buttons = document.querySelectorAll("button");
+initButtons();
+
+function initButtons() {
+	for(var i = 0; i < buttons.length; i++) {
+		buttons[i].addEventListener("click", inputFunction);
+	}
+}
 
 function operate(op, x, y) {
     switch(op) {
@@ -20,74 +27,82 @@ function operate(op, x, y) {
             break;
     }
 }
-const buttons = document.querySelectorAll("button");
-initButtons();
-
-function initButtons() {
-	for(var i = 0; i < buttons.length; i++) {
-		buttons[i].addEventListener("click", inputFunction);
-	}
-}
 
 function inputFunction() {
+	if(equalsPressed) {
+		input = x + "";
+		equalsPressed = false;
+	}
 	if(this.className == "op") {
-		x = parseInt(input);
-		if(this.id == "Plus") {
-			input += "+";
-			inputShow += " + ";
+		if(input == "" && op == "") {
+			answer = "not a valid input1";
 		}
-		else if(this.id == "Minus") {
-			input += "-";
-			inputShow += " - ";
-		}
-		else if(this.id == "Mult") {
-			input += "*";
-			inputShow += " * ";
-		}
-		op = this.id.toLowerCase();
-	}
-	else if(this.id == "equals") {
-		y = parseInt(tmpY);
-		answer = operate(op, x, y);
-		console.log("op " + op + " x " + x + " y " + y);
-		answerText.innerHTML = answer;
-		op = "";
-	}
-	if(this.className == "num") {
-		input += this.id;
-		inputShow += this.id;
-		if(op != "") {
-			tmpY += this.id;
-		}
-	}
-	if(this.id == "clear") {
-		op = "";
-		inputShow = "";
-		input = "";
-		x = 0;
-		y = 0;
-		tmpY = "";
-		answerText.innerHTML = "";
-	}
-
-	console.log("You clicked " + this.id);
-	updateInput();
-}
-
-	//buttons.forEach(function(e) {
-		//document.addEventListener("click", f(e));
-		//console.log(e);
-	//});
-
-function f(e) {
-			console.log(e.id === "op");
-			alert(e.id);
-			if(e.id === "op") {
-				console.log(e.id);
+		else {
+			if(op == "") {
+				x = parseInt(input);
+				op = this.id.toLowerCase();
+			}
+			else {
+				calcResult();
+				x = answer;
+				y = "";
+				input = answer;
+				answer = "";
+				op = this.id.toLowerCase();
+			}
+			if(this.id == "Plus") {
+				input += " + ";
+			}
+			else if(this.id == "Minus") {
+				input += " - ";
+			}
+			else if(this.id == "Mult") {
+				input += " * ";
+			}
+			else if(this.id == 	"Div") {
+				input += " / ";
 			}
 		}
+	}
+	else if(this.id == "equals") {
+		calcResult();
+		equalsPressed = true;
+	}
+	else if(this.className == "num") {
+		input += this.id;
+		if(op != "") {
+			y += this.id;
+		}
+	}
+	else if(this.id == "clear") {
+		op = "";
+		input = "";
+		answer = "";
+		x = "";
+		y = "";
+	}
+	updateInput();
+	updateAnswer();
+}
+
+function calcResult() {
+	if(y == "" || op == "") {
+		answer = "not a valid input";
+		console.log("x " + (x == "") + " y " + (y == "") + " op " + (op == ""));
+	}
+	else {
+		answer = operate(op, parseInt(x), parseInt(y));
+		op = "";
+		x = answer + "";
+		console.log("x equals " + x);
+		y = "";
+	}
+}
 
 function updateInput() {
-	inputText.innerHTML = inputShow;
-	//console.log(e);
+	inputText.innerHTML = input;
+}
+
+function updateAnswer() {
+	answerText.innerHTML = answer;
 }

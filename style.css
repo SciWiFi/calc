@@ -5,12 +5,14 @@ body {
 
 #show {
     height: 100px;
-    width: 500px;
     border: 2px solid #eeeeee;
     border-radius: 10px;
     box-shadow: 1px -5px 5px -5px;
-    margin: 10px;
     padding: 10px;
+}
+
+#calc {
+	box-shadow: 1px -5px 5px -5px;
 }
 
 #input {
@@ -23,16 +25,31 @@ body {
 	text-align: right;
 }
 
+.op {
+	background-color: #aaaaff;
+}
+
+#equals {
+	background-color: #eeaaff;
+}
+
+.num {
+	background-color: #9999ff;
+}
+
+/*
+    border-radius: 3px;
+    margin: 10px;*/
+
 button {
     background-color: #ffffff;
-    border: 2px solid #9999ff;
-    border-radius: 3px;
+    border: 0px solid #9999ff;
     padding: 10px 18px;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
     font-size: 19px;
     font-family: sans-serif;
-    height: 50px;
-    width: 50px;
+    height: 125px;
+    width: 125px;
 }
 
 button:hover {
@@ -49,5 +66,8 @@ button:hover {
 }
 
 #buttonsNum {
+	width: 100%;
     text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
